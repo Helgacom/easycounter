@@ -1,4 +1,4 @@
-package com.oremneva.easycounter;
+package easycounter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

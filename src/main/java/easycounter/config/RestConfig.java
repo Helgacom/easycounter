@@ -1,14 +1,15 @@
-package com.oremneva.easycounter.config;
+package easycounter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.Duration;
 import java.util.List;
@@ -17,21 +18,18 @@ import java.util.List;
 public class RestConfig {
 
     @Bean
-    CorsFilter corsFilter() {
-        // Источник конфигураций CORS
-        var corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        // Конфигурация CORS
-        var globalCorsConfiguration = new CorsConfiguration();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-        // Разрешаются CORS-запросы:
-        // - с сайта http://localhost:4200
-        globalCorsConfiguration.addAllowedOrigin("http://localhost:4200");
-        // - с нестандартными заголовками Authorization и X-CUSTOM-HEADER
+    @Bean
+    CorsFilter corsFilter() {
+        var corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        var globalCorsConfiguration = new CorsConfiguration();
+        globalCorsConfiguration.addAllowedOrigin("http://localhost:4300");
         globalCorsConfiguration.addAllowedHeader(HttpHeaders.AUTHORIZATION);
         globalCorsConfiguration.addAllowedHeader("*");
-        // - с передачей учётных данных
         globalCorsConfiguration.setAllowCredentials(true);
-        // - с методами GET, POST, PUT, PATCH и DELETE
         globalCorsConfiguration.setAllowedMethods(List.of(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
@@ -39,14 +37,9 @@ public class RestConfig {
                 HttpMethod.PATCH.name(),
                 HttpMethod.DELETE.name()
         ));
-        // JavaScript может обращаться к заголовку X-OTHER-CUSTOM-HEADER ответа
         globalCorsConfiguration.setExposedHeaders(List.of("X-OTHER-CUSTOM-HEADER"));
-        // Браузер может кешировать настройки CORS на 10 секунд
         globalCorsConfiguration.setMaxAge(Duration.ofSeconds(30));
-
-        // Использование конфигурации CORS для всех запросов
         corsConfigurationSource.registerCorsConfiguration("/**", globalCorsConfiguration);
-
         return new CorsFilter(corsConfigurationSource);
     }
 }

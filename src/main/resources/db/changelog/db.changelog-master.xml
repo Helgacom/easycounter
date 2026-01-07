@@ -5,4 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <include file="../scripts/001_ddl_create_users_table.sql" relativeToChangelogFile="true"/>
+    <include file="../scripts/20260106001100_create_table_products.xml" relativeToChangelogFile="true"/>
+    <include file="../scripts/20260106002800_load_data_products.xml" relativeToChangelogFile="true"/>
+    <include file="../scripts/20260106131200_edit_entity_product.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

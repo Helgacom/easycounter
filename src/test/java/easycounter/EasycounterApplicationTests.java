@@ -1,4 +1,4 @@
-package com.oremneva.easycounter;
+package easycounter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,5 +9,4 @@ class EasycounterApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

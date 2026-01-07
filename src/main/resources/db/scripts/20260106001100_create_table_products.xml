@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20260106001100-create-table-products-1" author="oremneva" context="production">
+
+        <preConditions onFail="HALT">
+            <not>
+                <tableExists tableName="products"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="products">
+
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="calories_per_100g" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="protein" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="fat" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="carb" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="products"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

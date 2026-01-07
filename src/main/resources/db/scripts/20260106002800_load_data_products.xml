@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20260106002800-load-data-products-1" author="oremneva">
+        <loadData tableName="products" file="db/data/products_1.csv" encoding="UTF-8">
+            <column name="id" type="NUMERIC"/>
+            <column name="name" type="STRING"/>
+            <column name="calories_per_100g" type="NUMERIC"/>
+            <column name="protein" type="NUMERIC"/>
+            <column name="fat" type="NUMERIC"/>
+            <column name="carb" type="NUMERIC"/>
+            <column name="description" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
