@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -39,5 +40,14 @@ public class ProductService {
                 .stream()
                 .map(productMapper::productToProductDTO)
                 .collect(Collectors.toList());
+    }
+
+    public boolean deleteById(Long id) {
+        productRepository.deleteById(id);
+        return productRepository.findById(id).isEmpty();
+    }
+
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 }

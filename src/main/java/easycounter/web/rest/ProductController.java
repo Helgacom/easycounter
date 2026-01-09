@@ -1,6 +1,7 @@
 package easycounter.web.rest;
 
 import easycounter.dto.ProductDTO;
+import easycounter.model.Product;
 import easycounter.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,5 +46,22 @@ public class ProductController {
         log.debug("REST request to get all Products");
         List<ProductDTO> entityList = productService.findAll();
         return ResponseEntity.ok().body(entityList);
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> get(@PathVariable Long id) {
+        log.debug("REST request to get Product by Id: {}", id);
+        return productService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @DeleteMapping("/product/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        log.debug("REST request to delete Product: {}", id);
+        if (productService.deleteById(id)) {
+            ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
