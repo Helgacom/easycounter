@@ -13,8 +13,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByLogin(String login);
-
     @Modifying
     @Query("delete from User as user where user.id = :id")
     int delete(@Param("id") Long id);
@@ -31,6 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int update(@Param("user") User user);
 
     Optional<User> findByName(String name);
+
+    Optional<User> findByLogin(String login);
 
     Boolean existsByName(String name);
 

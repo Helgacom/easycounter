@@ -8,4 +8,6 @@
     <include file="../scripts/20260106001100_create_table_products.xml" relativeToChangelogFile="true"/>
     <include file="../scripts/20260106002800_load_data_products.xml" relativeToChangelogFile="true"/>
     <include file="../scripts/20260106131200_edit_entity_product.xml" relativeToChangelogFile="true"/>
+    <include file="../scripts/20260117183900_create_table_role.xml" relativeToChangelogFile="true"/>
+    <include file="../scripts/20260117185700_create_table_user_role.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

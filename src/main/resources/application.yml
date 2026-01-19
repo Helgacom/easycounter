@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: easy_counter
+  server:
+    port: 8080
+  datasource:
+    url: jdbc:postgresql://localhost:5432/easy_counter
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    url: jdbc:postgresql://localhost:5432/easy_counter
+    user: postgres
+    password: admin
+  ai:
+    openai:
+      api-key: ${OPEN_AI_KEY}
+  jpa:
+    properties:
+      hibernate:
+        transaction:
+          jta:
+            platform: none
+    open-in-view: false
+  security:
+    logging:
+      level: DEBUG
+
+easy-counter:
+  openapi:
+    dev-url: http://localhost:8080
+    prod-url: https://mydomen.com
+  swagger-ui:
+    tryItOutEnabled: true
+
+jwt:
+  token:
+    secret: easehjkopyJhbGciOiJIUzI1NiJ9eyJzdWIiOiJzdHVkZW50X2pvYjRqIiwiaWF0Ijox
+    expired: 3600000
+
+file:
+  directory: files
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
+    org.springframework.security: DEBUG
+
+app:
+  cookieJwtKey: jwtToken
